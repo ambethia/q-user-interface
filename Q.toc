@@ -8,4 +8,5 @@
 Libs\LibStub.lua
 Media.lua
 Chat.lua
+ActionBars.lua
 oUF_Layout.lua
