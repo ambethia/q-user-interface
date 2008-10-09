@@ -1,0 +1,11 @@
+## Interface: 20400
+## Title: Q
+## Author: Jason L Perry
+## Notes: A UI
+## Dependencies: oUF
+## OptionalDeps: LibSharedMedia-3.0, LibSharedMedia-2.0, SharedMediaLib, SurfaceLib
+
+Libs\LibStub.lua
+Media.lua
+Chat.lua
+oUF_Layout.lua
