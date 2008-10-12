@@ -7,11 +7,11 @@ ActionBars.SCALE = (UIParent:GetWidth()/(NUM_ACTIONBAR_BUTTONS*4)) / ActionBars.
 
 ActionBars.hidden = {
   -- XP and Rep
-  MainMenuExpBar, ExhaustionTick, ReputationWatchBar,
+  MainMenuExpBar, ExhaustionTick, ReputationWatchBar, MainMenuBarMaxLevelBar,
 
   -- Gryphons
   MainMenuBarLeftEndCap, MainMenuBarRightEndCap,
-  
+
   -- Bags
   CharacterBag0Slot, CharacterBag1Slot, CharacterBag2Slot,
   CharacterBag3Slot, MainMenuBarBackpackButton, KeyRingButton,
@@ -20,10 +20,10 @@ ActionBars.hidden = {
   CharacterMicroButton, SpellbookMicroButton, TalentMicroButton,
   AchievementMicroButton, QuestLogMicroButton, SocialsMicroButton,
   PVPMicroButton, LFGMicroButton, MainMenuMicroButton, HelpMicroButton,
-  
+
   -- Bar Controls
   ActionBarUpButton, ActionBarDownButton, MainMenuBarPageNumber,
-  
+
   -- Backgrounds
   MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2,
   MainMenuBarTexture3,
@@ -37,7 +37,7 @@ ActionBars.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 ActionBars.frame:SetScript("OnEvent", function()
   ActionBars.frame:UnregisterAllEvents()
   ActionBars.frame:SetScript("OnEvent", nil)
-  
+
   -- Allow frames to be moved around
   for _, frame in pairs({ "MainMenuBar",
     "MultiBarBottomLeft", "MultiBarBottomRight",
@@ -45,12 +45,12 @@ ActionBars.frame:SetScript("OnEvent", function()
     UIPARENT_MANAGED_FRAME_POSITIONS[frame] = nil
     _G[frame]:Show() -- Force the MultiBars to show
   end
-  
+
   -- Not Worrying about this for now...
   -- -- Blackout the background of Shapeshift/Stance Bars
   -- BonusActionBarTexture0:SetVertexColor(0,0,0,1)
   -- BonusActionBarTexture1:SetVertexColor(0,0,0,1)
-  
+
   -- Hide most part of the main bar
   for _, frame in pairs(ActionBars.hidden) do
     frame:Hide()
@@ -66,17 +66,23 @@ ActionBars.frame:SetScript("OnEvent", function()
   ActionBars:flip("MultiBarRight")
 
   -- Main Bar
-  ActionBars:position(MainMenuBar,         "TOPLEFT",    UIParent,            "TOPLEFT",     4, 0)
+  
+  for i = 1, NUM_ACTIONBAR_BUTTONS do
+    _G["ActionButton"..i]:SetParent(MainMenuBar)
+  end
+  ActionButton1:ClearAllPoints()
+  ActionButton1:SetPoint("BOTTOMLEFT")
+  ActionBars:position(MainMenuBar,         "BOTTOMLEFT", MultiBarBottomLeft,  "TOPLEFT", 0, 0)
 
   -- Get the stance bar out of the way for now
   ShapeshiftBarFrame:ClearAllPoints()
-  ShapeshiftBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 0, -8)
+  ShapeshiftBarFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 0, -8)
 end)
 
 function ActionBars:position(bar, ...)
   -- Chat frame sits on top of these bars, too lazy to figure out what's
-  -- really going on with the frame sizes, +10 is a hack, looks good to me
-  bar:SetHeight(ActionBars.SIZE+10) 
+  -- really going on with the frame sizes, the height is a hack.
+  bar:SetHeight(ActionBars.SIZE) 
   bar:SetWidth(ActionBars.SIZE * NUM_ACTIONBAR_BUTTONS)
   bar:ClearAllPoints()
   bar:SetPoint(...)

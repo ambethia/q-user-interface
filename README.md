@@ -1,6 +1,6 @@
 # A World of Warcraft User Interface
 
-Still incomplete. Embeds oUF (http://ixo.no/git/oUF.git/).
+Still incomplete. Embeds [oUF](http://ixo.no/git/oUF.git/).
 
 ### Implemented:
 
