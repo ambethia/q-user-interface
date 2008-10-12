@@ -4,5 +4,5 @@ f:SetScript("OnEvent", function()
   f:UnregisterAllEvents()
   f:SetScript("OnEvent", nil)
   
-  MainMenuBar:Hide() -- Hide Blizzard Bar
+  -- MainMenuBar:Hide() -- Hide Blizzard Bar
 end)

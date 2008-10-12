@@ -1,3 +1,5 @@
+local oUF = oUF_embed
+
 local STATUS_BAR = [[Interface\AddOns\Q\Media\Minimalist]]
 local FONT       = [[Interface\AddOns\Q\Media\Calibri.ttf]]
 local FONT_B     = [[Interface\AddOns\Q\Media\CalibriBold.ttf]]
