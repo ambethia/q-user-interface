@@ -20,7 +20,7 @@ local menu = function(self)
 end
 
 local updateHealth = function(self, event, unit, bar, min, max)
-  local b, n
+  local b
   if(UnitIsTapped(unit) and not UnitIsTappedByPlayer(unit)) then
    b = self.colors.tapped
   elseif(UnitIsDead(unit)) then
@@ -40,14 +40,7 @@ local updateHealth = function(self, event, unit, bar, min, max)
     bar.value:SetFormattedText('%s/%s', min, max)
   end
   
-  -- Reaction Color
-  -- For WotLK, replace with UnitSelectionColor(unit)
-  if(not (unit == "player")) then
-    n = self.colors.reaction[UnitReaction(unit, "player")]
-    if(n) then
-      bar.value:SetTextColor(n[1], n[2], n[3], 0.66)
-    end
-  end
+  -- TODO, non players should just use reaction color
 
   bar:SetStatusBarColor(b[1], b[2], b[3])
   bar.bg:SetVertexColor(b[1] * 0.33, b[2] * 0.33, b[3] * 0.33)

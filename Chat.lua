@@ -1,6 +1,6 @@
 -- Originally based on Tekkub Stoutwrithe's teklayout:
 --   http://github.com/tekkub/teklayout/tree
-local VSIZE, GAP = 150, 5
+local VSIZE, GAP = 120, 5
 local HSIZE = (UIParent:GetWidth()/3)
 
 local groups = {
@@ -50,6 +50,13 @@ f:SetScript("OnEvent", function()
   SetCVar("useUiScale", 1)
   SetCVar("UISCALE", 1)
 
+  SetupFrame(ChatFrame1, VSIZE, HSIZE, 51, 51, 51, 107, "BOTTOMLEFT", MultiBarBottomLeft, "TOPLEFT", 0, 0)
+  ChatFrame1.SetPoint = function() end -- Wrath build 8820 started resetting ChatFrame1's position.  This ensures it doesn't fuck with my layout.
+  SetupFrame(ChatFrame3, VSIZE/2 - GAP/2, HSIZE, 5, 70, 6, 91, "TOPLEFT", ChatFrame1, "TOPRIGHT", GAP, 0)
+  SetupFrame(ChatFrame4, VSIZE/2 - GAP/2, HSIZE, 81, 14, 68, 119, "TOPLEFT", ChatFrame3, "BOTTOMLEFT", 0, -GAP)
+  SetupFrame(ChatFrame6, VSIZE, HSIZE, 39, 65, 68, 112, "TOPLEFT", ChatFrame3, "TOPRIGHT", GAP, 0)
+  SetCVar("chatLocked", 1)
+
   -- Hide dock tabs, and buttons
   for i=1,7 do
     _G["ChatFrame"..i.."TabDockRegionHighlight"]:Hide()   
@@ -58,12 +65,9 @@ f:SetScript("OnEvent", function()
     _G["ChatFrame"..i.."BottomButton"]:Hide()
   end
 
-  SetupFrame(ChatFrame1, VSIZE, HSIZE, 51, 51, 51, 107, "BOTTOMLEFT", UIParent, GAP/2, GAP)
-  ChatFrame1.SetPoint = function() end -- Wrath build 8820 started resetting ChatFrame1's position.  This ensures it doesn't fuck with my layout.
-  SetupFrame(ChatFrame3, VSIZE/2 - GAP/2, HSIZE, 5, 70, 6, 91, "TOPLEFT", ChatFrame1, "TOPRIGHT", GAP, 0)
-  SetupFrame(ChatFrame4, VSIZE/2 - GAP/2, HSIZE, 81, 14, 68, 119, "TOPLEFT", ChatFrame3, "BOTTOMLEFT", 0, -GAP)
-  SetupFrame(ChatFrame6, VSIZE, HSIZE, 39, 65, 68, 112, "TOPLEFT", ChatFrame3, "TOPRIGHT", GAP, 0)
-  SetCVar("chatLocked", 1)
+  ChatFrameEditBox:ClearAllPoints()
+  ChatFrameEditBox:SetPoint("TOPLEFT",  "ChatFrame3", "BOTTOMLEFT",  -5, 0)
+  ChatFrameEditBox:SetPoint("TOPRIGHT", "ChatFrame3", "BOTTOMRIGHT", 5, 0)
 
   WorldFrame:ClearAllPoints()
   WorldFrame:SetUserPlaced()
