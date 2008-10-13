@@ -49,6 +49,14 @@ Chat.frame:SetScript("OnEvent", function()
     c:SetScript("OnMouseWheel", function() Chat:OnMouseWheel(arg1) end)
   end
 
+  -- Hide the tabs and lock the all the chat frames, except General and Combat
+  for i=3,7 do
+    Chat:hideFrame("ChatFrame"..i.."Tab")
+    c = _G["ChatFrame"..i]
+    c.isLocked = 1;
+    SetChatWindowLocked(c:GetID(), 1);
+  end
+
   ChatFrameEditBox:ClearAllPoints()
   ChatFrameEditBox:SetPoint("TOPLEFT",  "ChatFrame4", "BOTTOMLEFT",  -5, 0)
   ChatFrameEditBox:SetPoint("TOPRIGHT", "ChatFrame4", "BOTTOMRIGHT", 5, 0)

@@ -24,10 +24,12 @@ ActionBars.hidden = {
   -- Bar Controls
   ActionBarUpButton, ActionBarDownButton, MainMenuBarPageNumber,
 
+  -- Class bar
+  ShapeshiftBarFrame,
+
   -- Backgrounds
   MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2,
   MainMenuBarTexture3,
-  ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
   -- SlidingActionBarTexture0, SlidingActionBarTexture1 -- ??
   BonusActionBarTexture0, BonusActionBarTexture1
 }
@@ -65,18 +67,10 @@ ActionBars.frame:SetScript("OnEvent", function()
   ActionBars:flip("MultiBarLeft")
   ActionBars:flip("MultiBarRight")
 
-  -- Main Bar
-  
-  for i = 1, NUM_ACTIONBAR_BUTTONS do
-    _G["ActionButton"..i]:SetParent(MainMenuBar)
-  end
+  -- Main Bar  
   ActionButton1:ClearAllPoints()
   ActionButton1:SetPoint("BOTTOMLEFT")
   ActionBars:position(MainMenuBar,         "BOTTOMLEFT", MultiBarBottomLeft,  "TOPLEFT", 0, 0)
-
-  -- Get the stance bar out of the way for now
-  ShapeshiftBarFrame:ClearAllPoints()
-  ShapeshiftBarFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 0, -8)
 end)
 
 function ActionBars:position(bar, ...)
