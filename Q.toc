@@ -8,9 +8,9 @@
 ## X-oUF: oUF_embed
 
 Libs\LibStub.lua
+Libs\ouF\ouF.xml
 Media.lua
 Chat.lua
 ActionBars.lua
-ouF\ouF.xml
 oUF_Layout.lua
 Maps.lua
