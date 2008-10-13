@@ -28,6 +28,26 @@ Maps.frame:SetScript("OnEvent", function()
     frame.Show = function() end
   end
 
+  -- Position the map
+  Minimap:SetPoint("TOPLEFT", ChatFrame3, "TOPRIGHT", 5, 0)
+  Minimap:SetHeight(125) -- Chat.lua (VSIZE + GAP)
+  Minimap:SetWidth(125)
+
+  -- Move the zone text
+  MinimapZoneTextButton:ClearAllPoints()
+  MinimapZoneTextButton:SetParent(MinimapBackdrop) 
+  MinimapZoneTextButton:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -2, -2)
+  MinimapZoneText:SetJustifyH("RIGHT")
+  MinimapZoneText:SetFont([[Interface\AddOns\Q\Media\CalibriBold.ttf]], 9)
+
+  -- Tracking Button
+  -- Texture goofs off when down, quick fix
+  MiniMapTrackingButton:SetScript("OnMouseDown", nil);
+  
+  MiniMapTracking:ClearAllPoints();
+  MiniMapTracking:SetPoint( "TOPLEFT", Minimap, -6, 6 );
+  MiniMapTracking:SetScale(0.75)
+
   -- Move clock inside the map frame
   TimeManagerClockButton:ClearAllPoints()
   TimeManagerClockButton:SetPoint("CENTER", Minimap, "BOTTOM", 0, 6)
@@ -44,6 +64,10 @@ Maps.hidden = {
   MiniMapWorldMapButton,
   MinimapNorthTag,
   GameTimeFrame,
+  MinimapBorderTop,
+  MinimapToggleButton,
+  MiniMapTrackingButtonBorder,
+  MiniMapTrackingBackground
 }
 
 function Maps:TimeManagerClockButton_OnClick(btn)

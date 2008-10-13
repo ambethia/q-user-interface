@@ -7,14 +7,15 @@ Still incomplete. Embeds [oUF](http://ixo.no/git/oUF.git/).
 * Player, Target, Target's Target and Focus frames
 * Inserts Calibri and Minimalist into a number of media libraries.
 * Auxiliary action bars
+* Minimap
+* Chat Layout
 
 ### Somewhat: 
 
-* Chat Layout
-* Main Bar / Class Bar
+* Main Bar (Stances aren't right)
 
 ### Not Implemented:
 
 * Raid/Party Frames
-* Minimap
 * Pet / Posses Bar
+* Buffs
