@@ -15,8 +15,8 @@ Maps.frame:SetScript("OnEvent", function()
    tile     = true, tileSize = 16, edgeSize = 16,
    insets   = { left = 3, right = 3, top = 3, bottom = 3 }
   })
-  MinimapBackdrop:SetBackdropBorderColor(0.75, 0.75, 0.75)
-  MinimapBackdrop:SetBackdropColor(0.15, 0.15, 0.15, 0.0)
+  MinimapBackdrop:SetBackdropBorderColor(0.5, 0.5, 0.5)
+  MinimapBackdrop:SetBackdropColor(0, 0, 0, 0)
   MinimapBackdrop:SetAlpha(1.0)
   MinimapBackdrop:ClearAllPoints()
   MinimapBackdrop:SetPoint("TOPLEFT",     Minimap, "TOPLEFT",    -4, 4)
