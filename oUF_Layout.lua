@@ -78,7 +78,7 @@ local function ambethianStyle(settings, self, unit)
   info:SetPoint("TOPRIGHT", -SPACING, -SPACING)
   info:SetJustifyH("RIGHT")
   info:SetTextColor(1, 1, 1)
-  info:SetText("[difficulty][smartlevel][plus] [rare] [raidcolor][smartclass]")
+  info:SetText("[difficulty][smartlevel][shortclassification] [rare] [raidcolor][smartclass]")
   table.insert(self.TaggedStrings, info)
 
   self.Info = info
@@ -99,7 +99,7 @@ local function ambethianStyle(settings, self, unit)
   healthBG:SetAllPoints(health)
   healthBG:SetTexture(STATUS_BAR)
   healthBG.multiplier = 0.33
-  health.bg    = healthBG
+  health.bg = healthBG
   
   -- Percent HP Text
   local healthHP = health:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
