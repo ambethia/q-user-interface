@@ -31,7 +31,7 @@ ActionBars.hidden = {
   MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2,
   MainMenuBarTexture3,
   -- SlidingActionBarTexture0, SlidingActionBarTexture1 -- ??
-  BonusActionBarTexture0, BonusActionBarTexture1
+  -- BonusActionBarTexture0, BonusActionBarTexture1 -- BLACKED OUT (BELOW)
 }
 
 ActionBars.frame = CreateFrame("Frame")
@@ -41,17 +41,13 @@ ActionBars.frame:SetScript("OnEvent", function()
   ActionBars.frame:SetScript("OnEvent", nil)
 
   -- Allow frames to be moved around
-  for _, frame in pairs({ "MainMenuBar",
+  for _, frame in pairs({
+    "MainMenuBar", "BonusActionBarFrame",
     "MultiBarBottomLeft", "MultiBarBottomRight",
-    "ShapeshiftBarFrame", "MultiBarLeft", "MultiBarRight" }) do
+    "MultiBarLeft", "MultiBarRight" }) do
     UIPARENT_MANAGED_FRAME_POSITIONS[frame] = nil
     _G[frame]:Show() -- Force the MultiBars to show
   end
-
-  -- Not Worrying about this for now...
-  -- -- Blackout the background of Shapeshift/Stance Bars
-  -- BonusActionBarTexture0:SetVertexColor(0,0,0,1)
-  -- BonusActionBarTexture1:SetVertexColor(0,0,0,1)
 
   -- Hide most part of the main bar
   for _, frame in pairs(ActionBars.hidden) do
@@ -71,12 +67,23 @@ ActionBars.frame:SetScript("OnEvent", function()
   ActionButton1:ClearAllPoints()
   ActionButton1:SetPoint("BOTTOMLEFT")
   ActionBars:position(MainMenuBar,         "BOTTOMLEFT", MultiBarBottomLeft,  "TOPLEFT", 0, 0)
+
+  -- Bonus Bar
+  -- -- Keep it hidden, and off screen untill called.
+  BonusActionBarFrame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", 0, 0)
+  BonusActionBarFrame:Hide()
+  -- -- Make sure it slides into the right place
+  BONUSACTIONBAR_YPOS = ActionBars.SIZE-4
+  BONUSACTIONBAR_XPOS = -6
+  -- -- Blackout the background
+  BonusActionBarTexture0:SetVertexColor(0,0,0,1)
+  BonusActionBarTexture1:SetVertexColor(0,0,0,1)
 end)
 
 function ActionBars:position(bar, ...)
   -- Chat frame sits on top of these bars, too lazy to figure out what's
   -- really going on with the frame sizes, the height is a hack.
-  bar:SetHeight(ActionBars.SIZE) 
+  bar:SetHeight(ActionBars.SIZE)
   bar:SetWidth(ActionBars.SIZE * NUM_ACTIONBAR_BUTTONS)
   bar:ClearAllPoints()
   bar:SetPoint(...)
