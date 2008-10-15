@@ -24,12 +24,11 @@ Q.ActionBars.hidden = {
   -- Bar Controls
   ActionBarUpButton, ActionBarDownButton, MainMenuBarPageNumber,
 
-  -- Class bar
-  ShapeshiftBarFrame,
+  -- Class Bar
+  -- ShapeshiftBarFrame, 
 
   -- Backgrounds
-  MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2,
-  MainMenuBarTexture3,
+  MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2, MainMenuBarTexture3,
   -- SlidingActionBarTexture0, SlidingActionBarTexture1 -- ??
   -- BonusActionBarTexture0, BonusActionBarTexture1 -- BLACKED OUT (BELOW)
 }
@@ -41,15 +40,14 @@ Q.ActionBars.frame:SetScript("OnEvent", function()
   Q.ActionBars.frame:SetScript("OnEvent", nil)
 
   -- Allow frames to be moved around
-  for _, frame in pairs({
-    "MainMenuBar", "BonusActionBarFrame",
-    "MultiBarBottomLeft", "MultiBarBottomRight",
+  for _, frame in pairs({ "MainMenuBar",
+    "BonusActionBarFrame", "ShapeshiftBarFrame", "PossessBarFrame",
+    "MultiBarBottomLeft", "MultiBarBottomRight", 
     "MultiBarLeft", "MultiBarRight" }) do
     UIPARENT_MANAGED_FRAME_POSITIONS[frame] = nil
-    _G[frame]:Show() -- Force the MultiBars to show
   end
 
-  -- Hide most part of the main bar
+  -- Hide parts of the main bar that are save to hide.
   for _, frame in pairs(Q.ActionBars.hidden) do
     frame:Hide()
     frame.Show = function() end
@@ -71,13 +69,20 @@ Q.ActionBars.frame:SetScript("OnEvent", function()
   -- Bonus Bar
   -- -- Keep it hidden, and off screen untill called.
   BonusActionBarFrame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", 0, 0)
-  BonusActionBarFrame:Hide()
+  if not BonusActionBarFrame:IsShown() then
+    BonusActionBarFrame:Hide()
+  end
   -- -- Make sure it slides into the right place
   BONUSACTIONBAR_YPOS = Q.ActionBars.SIZE-4
   BONUSACTIONBAR_XPOS = -6
   -- -- Blackout the background
   BonusActionBarTexture0:SetVertexColor(0,0,0,1)
   BonusActionBarTexture1:SetVertexColor(0,0,0,1)
+  
+  -- Class Bar
+  ShapeshiftBarFrame:ClearAllPoints()
+	ShapeshiftBarFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 0, -8);
+	
 end)
 
 function Q.ActionBars:position(bar, ...)
