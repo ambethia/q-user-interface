@@ -30,7 +30,7 @@ Q.ActionBars.hidden = {
   -- Backgrounds
   MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2, MainMenuBarTexture3,
   -- SlidingActionBarTexture0, SlidingActionBarTexture1 -- ??
-  BonusActionBarTexture0, BonusActionBarTexture1 -- BLACKED OUT (BELOW)
+  -- BonusActionBarTexture0, BonusActionBarTexture1 -- BLACKED OUT (BELOW)
 }
 
 Q.ActionBars.frame = CreateFrame("Frame")
@@ -67,7 +67,6 @@ Q.ActionBars.frame:SetScript("OnEvent", function()
   ActionButton1:SetPoint("BOTTOMLEFT")
 
   -- Bonus Bar
-  -- -- Keep it hidden, and off screen untill called.
   BonusActionBarFrame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", 0, 0)
   BonusActionButton1:ClearAllPoints()
   BonusActionButton1:SetPoint("BOTTOMLEFT", BonusActionBarFrame, "BOTTOMLEFT", -4, 1)
@@ -75,8 +74,8 @@ Q.ActionBars.frame:SetScript("OnEvent", function()
     BonusActionBarFrame:Hide()
   end
   -- -- Blackout the background
-  -- BonusActionBarTexture0:SetVertexColor(0,0,0,1)
-  -- BonusActionBarTexture1:SetVertexColor(0,0,0,1)
+  BonusActionBarTexture0:SetVertexColor(0,0,0,1)
+  BonusActionBarTexture1:SetVertexColor(0,0,0,1)
   
   -- Class Bar
   ShapeshiftBarFrame:ClearAllPoints()
