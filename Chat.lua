@@ -1,11 +1,14 @@
+local _G = getfenv(0);
+local Q  = _G["Q"]
+
 -- Originally based on Tekkub Stoutwrithe's teklayout:
 --   http://github.com/tekkub/teklayout/tree
 local VSIZE, GAP = 120, 5
 local HSIZE = (UIParent:GetWidth()/4)
 
-local Chat = {}
+Q.Chat = {}
 
-Chat.groups = {
+Q.Chat.groups = {
   [ChatFrame1] = {"SYSTEM", "SYSTEM_NOMENU", "ERRORS", "ACHIEVEMENT", "CHANNEL"},
   [ChatFrame3] = {"GUILD", "GUILD_OFFICER", "GUILD_ACHIEVEMENT"},
   [ChatFrame4] = { "AFK", "DND", "EMOTE", "IGNORED", "SAY", "WHISPER",
@@ -15,21 +18,21 @@ Chat.groups = {
   [ChatFrame5] = {"COMBAT_FACTION_CHANGE", "SKILL", "LOOT", "MONEY", "COMBAT_XP_GAIN", "COMBAT_HONOR_GAIN", "COMBAT_MISC_INFO"},
 }
 
-Chat.frame = CreateFrame("Frame")
-Chat.frame:RegisterEvent("PLAYER_LOGIN")
-Chat.frame:SetScript("OnEvent", function()
-  Chat.frame:UnregisterAllEvents()
-  Chat.frame:SetScript("OnEvent", nil)
+Q.Chat.frame = CreateFrame("Frame")
+Q.Chat.frame:RegisterEvent("PLAYER_LOGIN")
+Q.Chat.frame:SetScript("OnEvent", function()
+  Q.Chat.frame:UnregisterAllEvents()
+  Q.Chat.frame:SetScript("OnEvent", nil)
 
   -- Make edit box stick to channel chat
   ChatTypeInfo["CHANNEL"] = { sticky = 1 };
 
   local barSize = UIParent:GetWidth()/(NUM_ACTIONBAR_BUTTONS*4)
 
-  Chat:setupFrame(ChatFrame1, VSIZE-barSize, HSIZE-GAP, 51, 51, 51, 107, "BOTTOMLEFT",  MultiBarBottomLeft, "TOPLEFT",     0,   barSize+GAP)
-  Chat:setupFrame(ChatFrame3, VSIZE/2 - GAP, HSIZE-GAP, 5,  70, 6,  91,  "TOPLEFT",     ChatFrame1,         "TOPRIGHT",    GAP, 0)
-  Chat:setupFrame(ChatFrame4, VSIZE/2 - GAP, HSIZE-GAP, 81, 14, 68, 119, "TOPLEFT",     ChatFrame3,         "BOTTOMLEFT",  0,   -GAP*2)
-  Chat:setupFrame(ChatFrame5, VSIZE,         HSIZE-GAP, 39, 65, 68, 112, "BOTTOMRIGHT", MultiBarRight,      "TOPRIGHT",    -GAP,GAP)
+  Q.Chat:setupFrame(ChatFrame1, VSIZE-barSize, HSIZE-GAP, 51, 51, 51, 107, "BOTTOMLEFT",  MultiBarBottomLeft, "TOPLEFT",     0,   barSize+GAP)
+  Q.Chat:setupFrame(ChatFrame3, VSIZE/2 - GAP, HSIZE-GAP, 5,  70, 6,  91,  "TOPLEFT",     ChatFrame1,         "TOPRIGHT",    GAP, 0)
+  Q.Chat:setupFrame(ChatFrame4, VSIZE/2 - GAP, HSIZE-GAP, 81, 14, 68, 119, "TOPLEFT",     ChatFrame3,         "BOTTOMLEFT",  0,   -GAP*2)
+  Q.Chat:setupFrame(ChatFrame5, VSIZE,         HSIZE-GAP, 39, 65, 68, 112, "BOTTOMRIGHT", MultiBarRight,      "TOPRIGHT",    -GAP,GAP)
   SetCVar("chatLocked", 0)
 
   ChatFrame1.SetPoint = function() end -- Wrath build 8820 started resetting ChatFrame1's position.  This ensures it doesn't fuck with my layout.
@@ -39,19 +42,19 @@ Chat.frame:SetScript("OnEvent", function()
 
   for i=1,7 do
     -- Hide buttons
-    Chat:hideFrame("ChatFrame"..i.."UpButton")
-    Chat:hideFrame("ChatFrame"..i.."DownButton")
-    Chat:hideFrame("ChatFrame"..i.."BottomButton")
+    Q.Chat:hideFrame("ChatFrame"..i.."UpButton")
+    Q.Chat:hideFrame("ChatFrame"..i.."DownButton")
+    Q.Chat:hideFrame("ChatFrame"..i.."BottomButton")
 
     -- Enable mouse wheel scrolling
     c = _G["ChatFrame"..i]
     c:EnableMouseWheel(1)
-    c:SetScript("OnMouseWheel", function() Chat:OnMouseWheel(arg1) end)
+    c:SetScript("OnMouseWheel", function() Q.Chat:OnMouseWheel(arg1) end)
   end
 
   -- Hide the tabs and lock the all the chat frames, except General and Combat
   for i=3,7 do
-    Chat:hideFrame("ChatFrame"..i.."Tab")
+    Q.Chat:hideFrame("ChatFrame"..i.."Tab")
     c = _G["ChatFrame"..i]
     c.isLocked = 1;
     SetChatWindowLocked(c:GetID(), 1);
@@ -68,7 +71,7 @@ Chat.frame:SetScript("OnEvent", function()
   WorldFrame:SetPoint("BOTTOM", ChatFrame1, "TOP", 0, GAP/2)
 end)
 
-function Chat:setupFrame(frame, h, w, r, g, b, a, ...)
+function Q.Chat:setupFrame(frame, h, w, r, g, b, a, ...)
   local id = frame:GetID()
 
   if frame ~= ChatFrame1 then
@@ -98,7 +101,7 @@ function Chat:setupFrame(frame, h, w, r, g, b, a, ...)
   for i,v in pairs(self.groups[frame]) do ChatFrame_AddMessageGroup(frame, v) end
 end
 
-function Chat:OnMouseWheel(direction)
+function Q.Chat:OnMouseWheel(direction)
   if direction > 0 then
     if IsShiftKeyDown() then this:ScrollToTop() else this:ScrollUp() end
   elseif direction < 0 then
@@ -106,7 +109,7 @@ function Chat:OnMouseWheel(direction)
   end
 end
 
-function Chat:hideFrame(frameName)
+function Q.Chat:hideFrame(frameName)
   local frame = _G[frameName]
   frame:Hide()
   frame.Show = function() end

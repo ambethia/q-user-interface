@@ -9,8 +9,10 @@
 
 Libs\LibStub.lua
 Libs\ouF\ouF.xml
+Q.lua
 Media.lua
 Chat.lua
 ActionBars.lua
 oUF_Layout.lua
 Maps.lua
+ComboPoints.lua

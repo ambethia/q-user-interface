@@ -1,3 +1,6 @@
+local _G = getfenv(0);
+local Q  = _G["Q"]
+
 local oUF = oUF_embed
 
 local STATUS_BAR = [[Interface\AddOns\Q\Media\Minimalist]]

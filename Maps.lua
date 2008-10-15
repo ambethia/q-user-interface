@@ -1,10 +1,13 @@
-local Maps = {}
+local _G = getfenv(0);
+local Q  = _G["Q"]
 
-Maps.frame = CreateFrame("Frame")
-Maps.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-Maps.frame:SetScript("OnEvent", function()
-  Maps.frame:UnregisterAllEvents()
-  Maps.frame:SetScript("OnEvent", nil)
+Q.Maps = {}
+
+Q.Maps.frame = CreateFrame("Frame")
+Q.Maps.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+Q.Maps.frame:SetScript("OnEvent", function()
+  Q.Maps.frame:UnregisterAllEvents()
+  Q.Maps.frame:SetScript("OnEvent", nil)
 
   -- Square Minimap
   Minimap:SetMaskTexture([[Interface\Addons\Q\Media\MinimapMask]])
@@ -23,7 +26,7 @@ Maps.frame:SetScript("OnEvent", function()
   MinimapBackdrop:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -4)
 
   -- Hide shit
-  for _, frame in pairs(Maps.hidden) do
+  for _, frame in pairs(Q.Maps.hidden) do
     frame:Hide()
     frame.Show = function() end
   end
@@ -54,11 +57,11 @@ Maps.frame:SetScript("OnEvent", function()
   select(1, TimeManagerClockButton:GetRegions()):SetTexture(nil)
 
   -- Right click clock to open calendar, left for alarm/time config
-  Maps.TimeManagerClockButton_OriginalOnClick = TimeManagerClockButton:GetScript("OnClick")
-  TimeManagerClockButton:SetScript("OnClick", Maps.TimeManagerClockButton_OnClick)
+  Q.Maps.TimeManagerClockButton_OriginalOnClick = TimeManagerClockButton:GetScript("OnClick")
+  TimeManagerClockButton:SetScript("OnClick", Q.Maps.TimeManagerClockButton_OnClick)
 end)
 
-Maps.hidden = {
+Q.Maps.hidden = {
   MinimapZoomOut,
   MinimapZoomIn,
   MiniMapWorldMapButton,
@@ -70,9 +73,9 @@ Maps.hidden = {
   MiniMapTrackingBackground
 }
 
-function Maps:TimeManagerClockButton_OnClick(btn)
+function Q.Maps:TimeManagerClockButton_OnClick(btn)
   if btn == "RightButton" then
     return ToggleCalendar()
   end
-  return Maps:TimeManagerClockButton_OriginalOnClick(btn)
+  return Q.Maps:TimeManagerClockButton_OriginalOnClick(btn)
 end
