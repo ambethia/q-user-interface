@@ -11,9 +11,9 @@
 Libs\LibStub.lua
 Libs\ouF\ouF.xml
 Q.lua
-Media.lua
-Chat.lua
 ActionBars.lua
-oUF_Layout.lua
-Maps.lua
+Chat.lua
 ComboPoints.lua
+Maps.lua
+Media.lua
+Units.lua

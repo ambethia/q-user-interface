@@ -41,7 +41,7 @@ Q.Maps.frame:SetScript("OnEvent", function()
   MinimapZoneTextButton:SetParent(MinimapBackdrop) 
   MinimapZoneTextButton:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -2, -2)
   MinimapZoneText:SetJustifyH("RIGHT")
-  MinimapZoneText:SetFont([[Interface\AddOns\Q\Media\CalibriBold.ttf]], 9)
+  MinimapZoneText:SetFont(Q.FONT_B, 9)
 
   -- Tracking Button
   -- Texture goofs off when down, quick fix

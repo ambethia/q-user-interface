@@ -8,4 +8,9 @@ Q:SetScript("OnEvent", function()
   TemporaryEnchantFrame:Hide()
 end)
 
+Q.STATUS_BAR = [[Interface\AddOns\Q\Media\Minimalist]]
+Q.FONT       = [[Interface\AddOns\Q\Media\Calibri.ttf]]
+Q.FONT_B     = [[Interface\AddOns\Q\Media\CalibriBold.ttf]]
+
+
 _G["Q"] = Q
