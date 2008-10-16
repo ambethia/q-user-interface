@@ -191,6 +191,7 @@ local function ambethianStyle(settings, self, unit)
   
   -- Cast Bar
   if (unit == "player" or unit == "target" or unit == "focus") then
+  
     local cast = CreateFrame("StatusBar")
     cast:SetWidth(width*0.61803399)
     cast:SetHeight(SECONDARY_HEIGHT)
@@ -253,6 +254,28 @@ local function ambethianStyle(settings, self, unit)
 
     self.Castbar = cast
   end
+
+  -- Auras
+  self.Auras = CreateFrame("Frame", nil, self)
+  self.Auras:SetPoint("BOTTOMLEFT", self, "TOPLEFT", SPACING, SPACING/2)
+  self.Auras:SetWidth(width-(SPACING*2))
+  self.Auras:SetHeight(16)
+  self.Auras.size    = 16
+  self.Auras.spacing = SPACING/2
+  self.Auras.gap     = true
+
+  self.PostCreateAuraIcon = Q.Units.PostCreateAuraIcon
+end
+
+Q.Units.PostCreateAuraIcon = function(self, button, icons, index, debuff)
+  icons.showDebuffType = true
+  button.cd:SetReverse()
+  -- Remove buff on right click
+  button:SetScript("OnMouseUp", function(self, mouseButton)
+    if (mouseButton == "RightButton") then
+      CancelUnitBuff("player", index)
+    end
+  end)
 end
 
 -- --- Color cast bar based on spell school, once I can figure out how

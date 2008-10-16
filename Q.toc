@@ -1,8 +1,9 @@
 ## Interface: 30000
-## Title: Q
+## Title: |cff0174DFQ|r
+
 ## Author: Jason L Perry
 ## Version: Alpha
-## Notes: A UI
+## Notes: User Interface
 ## OptionalDeps: LibSharedMedia-3.0, LibSharedMedia-2.0, SharedMediaLib, SurfaceLib
 
 ## X-oUF: oUF_embed

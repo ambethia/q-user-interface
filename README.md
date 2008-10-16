@@ -1,7 +1,8 @@
-# A World of Warcraft User Interface
+# Q: A World of Warcraft User Interface
 
-I'm tired of running two dozen separate addons that each customize one part of
-the interface to my liking. So I'm scrapping all the cruft and building my UI.
+I'm tired of running two dozen separate addons that each customize a single
+part of the interface to my liking. So I'm scrapping all the cruft and
+building my own UI.
 
 Zero config. Embeds [oUF](http://ixo.no/git/oUF.git/).
 
@@ -12,15 +13,15 @@ Zero config. Embeds [oUF](http://ixo.no/git/oUF.git/).
 * Action bars
 * Minimap
 * Chat Layout
+* Buffs
 * Inserts Calibri and Minimalist into a number of media libraries.
 
-## Not Yet Implemented:
+### Not Yet Implemented:
 
 * Raid/Party Frames
-* Pet / Posses Bar
-* Buffs
+* Pet & Possess Bars
 
-### Issues:
+## Known Issues:
 
 * Bonus bar is transparent until I get the textures there worked out.
 * Class bar isn't handled gracefully
