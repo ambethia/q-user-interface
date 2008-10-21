@@ -6,14 +6,10 @@
 ## Notes: User Interface
 ## OptionalDeps: LibSharedMedia-3.0, LibSharedMedia-2.0, SharedMediaLib, SurfaceLib
 
-## X-oUF: oUF_embed
-
 Libs\LibStub.lua
-Libs\ouF\ouF.xml
 Q.lua
 ActionBars.lua
 Chat.lua
 ComboPoints.lua
 Maps.lua
 Media.lua
-Units.lua
